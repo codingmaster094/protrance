@@ -1,0 +1,71 @@
+// components/SEO_schema.jsx
+import React from "react";
+import dynamic from "next/dynamic";
+import AllPost from "../untils/AllPostFatch";
+
+const SchemaInjector = dynamic(() => import("../components/SchemaInjector"), {
+  ssr: true,
+});
+
+const Post_SEO_schema = async ({ slug, faqs }) => {
+  try {
+    const metadata = await AllPost(slug);
+    console.log('metadata', metadata)
+    const schemaJSON = metadata?.docs[0]?.seo || null;
+    const author = metadata || null;
+    if (!schemaJSON && (!faqs || faqs.length === 0)) return null;
+
+    // The base URL for the page, which is currently used in mainEntityOfPage
+    const pageUrl = "https://protrance.vercel.app/"; // Define once
+    // Build FAQ Schema
+    const Schema =
+      schemaJSON 
+        ? {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "url": pageUrl,
+          "mainEntityOfPage": {
+            "@id": pageUrl
+          },
+          "name": "FAQ – Psychotherapie",
+          "headline": schemaJSON.meta.title,
+          "description": schemaJSON.meta.description,
+          "datePublished":author.publishedAt,
+          "dateModified": author.updatedAt,
+          // "author":{
+          //   "@type":"Person",
+          //   "name":author.author.email
+          // },
+        }
+        : null;
+
+    const faqSchema =
+      faqs && faqs.length > 0
+        ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "url": pageUrl,
+          "mainEntityOfPage": {
+            "@id": pageUrl
+          },
+          "name": "FAQ – Psychotherapie",
+          "headline": "Häufig gestellte Fragen zur Psychotherapie",
+          "mainEntity": faqs.map((faq) => ({
+            "@type": "Question",
+            "name": faq.title,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": faq.description?.root?.children?.[0]?.children?.[0]?.text.replace(/<\/?p>/g, "")
+            }
+          }))
+        }
+        : null;
+
+    return <SchemaInjector schemaJSON={Schema} faqSchema={faqSchema} />;
+  } catch (error) {
+    console.error("Error fetching SEO schema:", error);
+    return null;
+  }
+};
+
+export default Post_SEO_schema;

@@ -8,8 +8,9 @@ import Reviews from "../ReviewData/page";
 import FAQ from "../components/FAQ"
 import LongTermEffects from '../components/LongTermEffects'
 import Alldata from "../untils/AllDataFatch";
-import dynamic from "next/dynamic";
-const SchemaInjector = dynamic(() => import("../components/SchemaInjector"));
+import SEO_schema from '../components/SEO_schema'
+import generatePageMetadata from '../untils/generatePageMetadata'
+
 const page = async () => {
   let Entspannung_StressabbauData;
   let schemaJSON = null;
@@ -28,7 +29,7 @@ const page = async () => {
 
   return (
     <>
-      <SchemaInjector schemaJSON={schemaJSON} />
+      <SEO_schema slug="/entspannung_StressabbauPage" faqs={Entspannung_StressabbauData.faq.nestedfaq} />
       <Banner
         Heading={Entspannung_StressabbauData.hero.text}
         Banner={Entspannung_StressabbauData.hero.heroImage.url}
@@ -96,19 +97,8 @@ const page = async () => {
 export default page
 
 export async function generateMetadata() {
-  const metadata = await Alldata("/entspannung_StressabbauPage");
-
-  const title = metadata?.seo?.meta?.title || "Default Title";
-  const description = metadata?.seo?.meta?.description || "Default Description";
-  const canonical =
-    metadata?.seo?.meta?.canonicalUrl ||
-    "";
-
-  return {
-    title,
-    description,
-    alternates: {
-      canonical,
-    },
-  };
+  return generatePageMetadata("/entspannung_StressabbauPage", {
+    title: "entspannung_StressabbauPage",
+    description: "entspannung_StressabbauPage",
+  });
 }

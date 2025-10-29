@@ -10,7 +10,7 @@ import Reference from '../components/Reference'
 import Protrance from '../components/Protrance'
 import FAQ from '../components/FAQ'
 import AllData from "../untils/AllDataFatch"
-
+import SEO_schema from '../components/SEO_schema'
 const page = async () => {
   let HomePageData;
   try {
@@ -25,6 +25,7 @@ const page = async () => {
   }
   return (
     <>
+     <SEO_schema slug="/home" faqs={HomePageData.faq.nestedfaq} />
       <Banner
         Heading={HomePageData.hero.text}
         Banner={HomePageData.hero.heroImage?.url}

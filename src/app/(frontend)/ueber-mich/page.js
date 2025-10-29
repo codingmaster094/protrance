@@ -9,14 +9,12 @@ import Raucherentwöhnung from '../components/Raucherentwöhnung'
 import HowTofindMe from "../components/HowTofindMe"
 import Map from '../components/map'
 import Alldata from "../untils/AllDataFatch"
-import dynamic from "next/dynamic";
-const SchemaInjector = dynamic(() => import("../components/SchemaInjector"));
+import SEO_schema from '../components/SEO_schema'
+import generatePageMetadata from '../untils/generatePageMetadata'
 const page = async () => {
   let UnerMichData;
-  let schemaJSON = null;
   try {
     UnerMichData = await Alldata("/uber-mich");
-    schemaJSON = JSON.stringify(UnerMichData.seo.structuredData);
   } catch (error) {
     console.error("Error fetching data:", error);
     return <div>Error loading data.</div>;
@@ -28,7 +26,7 @@ const page = async () => {
 
   return (
     <>
-      <SchemaInjector schemaJSON={schemaJSON} />
+      <SEO_schema slug="/uber-mich" faqs={""} />
       <Banner
         Heading={UnerMichData.hero.text}
         Banner={UnerMichData.hero.heroImage.url}
@@ -113,19 +111,8 @@ const page = async () => {
 export default page
 
 export async function generateMetadata() {
-  const metadata = await Alldata("/uber-mich");
-
-  const title = metadata?.seo?.meta?.title || "Default Title";
-  const description = metadata?.seo?.meta?.description || "Default Description";
-  const canonical =
-    metadata?.seo?.meta?.canonicalUrl ||
-    "";
-
-  return {
-    title,
-    description,
-    alternates: {
-      canonical,
-    },
-  };
+  return generatePageMetadata("/uber-mich", {
+    title: "uber-mich",
+    description: "uber-mich",
+  });
 }

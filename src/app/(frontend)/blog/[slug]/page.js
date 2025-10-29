@@ -1,20 +1,16 @@
 import React from 'react'
-import AllPost from '../../untils/All PostFatch';
+import AllPost from '../../untils/AllPostFatch';
 import Blogdetails from '../../components/Blogdetails';
 import Blogbanner from '../../components/Blogbanner';
 import BlogClients from '../../components/BlogClients';
-import dynamic from "next/dynamic";
-const SchemaInjector = dynamic(() => import("../../components/SchemaInjector"));
+import Post_SEO_schema from '../../components/Post_SEO_schema'
+import generatepostMetadata from '../../untils/generatepostMetadata';
 const page = async ({ params }) => {
   const { slug } = await params
   let SingleBlogData;
-  let schemaJSON = null;
 
   try {
-    SingleBlogData = await AllPost(`/posts?where[slug][equals]=${slug}`);
-    schemaJSON = JSON.stringify(
-      SingleBlogData.docs[0].seo.structuredData
-    );
+    SingleBlogData = await AllPost(`${slug}`);
   } catch (error) {
     console.error("Error fetching data:", error);
     return <div>Error loading data.</div>;
@@ -26,7 +22,7 @@ const page = async ({ params }) => {
 
   return (
     <>
-      <SchemaInjector schemaJSON={schemaJSON} />
+      <Post_SEO_schema slug={`${slug}`} faqs={SingleBlogData.docs[0].faq.nestedfaq} />
       <Blogbanner
         Heading={SingleBlogData.docs[0].hero.text}
         Banner={SingleBlogData.docs[0].hero.heroImage.url}
@@ -67,20 +63,10 @@ const page = async ({ params }) => {
 
 export default page
 
-export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const metadata = await AllPost(`/posts?where[slug][equals]=${slug}`);
-  const title = metadata.docs[0]?.seo?.meta?.title || "Default Title";
-  const description = metadata.docs[0]?.seo?.meta?.description || "Default Description";
-  const canonical =
-    metadata.docs[0]?.seo?.meta?.canonicalUrl ||
-    "";
-
-  return {
-    title,
-    description,
-    alternates: {
-      canonical,
-    },
-  };
+export async function generateMetadata({params}) {
+  const { slug } = await params
+  return generatepostMetadata(`${slug}`, {
+    title: `${slug}`,
+    description: `${slug}`,
+  });
 }

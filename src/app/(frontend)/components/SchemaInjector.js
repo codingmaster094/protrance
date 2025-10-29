@@ -1,27 +1,28 @@
 "use client";
 import { useEffect } from "react";
 
-export default function SchemaInjector({ schemaJSON }) {
+export default function SchemaInjector({ schemaJSON, faqSchema }) {
   useEffect(() => {
-    if (!schemaJSON) return;
+    if (!schemaJSON && !faqSchema) return;
+    const graphItems = [];
+    if (schemaJSON) graphItems.push(schemaJSON);
+    if (faqSchema) graphItems.push(faqSchema);
 
-    const existingScript = document.getElementById("payload-schema");
-    if (existingScript) existingScript.remove();
+    const schemaData = {
+      "@context": "https://schema.org",
+      "@graph": graphItems,
+    };
 
     const script = document.createElement("script");
     script.type = "application/ld+json";
-    script.id = "payload-schema";
+    script.id = "schema-markup";
+    script.text = JSON.stringify(schemaData);
 
-    script.textContent =
-      typeof schemaJSON === "string" ? schemaJSON : JSON.stringify(schemaJSON);
+    const oldScript = document.getElementById("schema-markup");
+    if (oldScript) oldScript.remove();
 
     document.head.appendChild(script);
-
-    return () => {
-      const cleanup = document.getElementById("payload-schema");
-      if (cleanup) cleanup.remove();
-    };
-  }, [schemaJSON]);
+  }, [schemaJSON, faqSchema]);
 
   return null;
 }

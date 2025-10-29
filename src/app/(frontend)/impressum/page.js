@@ -1,13 +1,11 @@
 import React from "react";
 import Alldata from "../untils/AllDataFatch";
-import dynamic from "next/dynamic";
-const SchemaInjector = dynamic(() => import("../components/SchemaInjector"));
+import SEO_schema from '../components/SEO_schema'
+import generatePageMetadata from '../untils/generatePageMetadata'
 const page = async () => {
   let ImpressumData;
-  let schemaJSON = null;
   try {
     ImpressumData = await Alldata("/impressum");
-    schemaJSON = JSON.stringify(ImpressumData.seo.structuredData);
   } catch (error) {
     console.error("Error fetching data:", error);
     return <div>Error loading data.</div>;
@@ -18,7 +16,7 @@ const page = async () => {
   }
   return (
     <>
-      <SchemaInjector schemaJSON={schemaJSON} />
+      <SEO_schema slug="/impressum" faqs={""} />
       <div className="h-[137px] bg-accent"></div>
       <section className="policy_content term-policy">
         <div className="py-4 md:py-6 2xl:py-[100px] bg-[#9a1a60] text-white">
@@ -43,19 +41,8 @@ const page = async () => {
 export default page;
 
 export async function generateMetadata() {
-  const metadata = await Alldata("/impressum");
-
-  const title = metadata?.seo?.meta?.title || "Default Title";
-  const description = metadata?.seo?.meta?.description || "Default Description";
-  const canonical =
-    metadata?.seo?.meta?.canonicalUrl ||
-    "";
-
-  return {
-    title,
-    description,
-    alternates: {
-      canonical,
-    },
-  };
+  return generatePageMetadata("/impressum", {
+    title: "impressum",
+    description: "impressum",
+  });
 }

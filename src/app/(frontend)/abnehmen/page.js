@@ -8,8 +8,9 @@ import Reviews from "../ReviewData/page";
 import FAQ from "../components/FAQ"
 import Hypnosisweightloss from '../components/hypnosisweightloss'
 import Alldata from "../untils/AllDataFatch";
-import dynamic from "next/dynamic";
-const SchemaInjector = dynamic(() => import("../components/SchemaInjector"));
+import SEO_schema from '../components/SEO_schema'
+import generatePageMetadata from '../untils/generatePageMetadata'
+
 const Page = async () => {
   let AbnehmenPageData;
   let schemaJSON = null;
@@ -28,7 +29,7 @@ const Page = async () => {
 
   return (
     <>
-      <SchemaInjector schemaJSON={schemaJSON} />
+      <SEO_schema slug="/abnehmen" faqs={AbnehmenPageData.faq.nestedfaq} />
       <Banner
         Heading={AbnehmenPageData.hero.text}
         Banner={AbnehmenPageData.hero.heroImage.url}
@@ -92,19 +93,8 @@ const Page = async () => {
 export default Page
 
 export async function generateMetadata() {
-  const metadata = await Alldata("/abnehmen");
-
-  const title = metadata?.seo?.meta?.title || "Default Title";
-  const description = metadata?.seo?.meta?.description || "Default Description";
-  const canonical =
-    metadata?.seo?.meta?.canonicalUrl ||
-    "";
-
-  return {
-    title,
-    description,
-    alternates: {
-      canonical,
-    },
-  };
+  return generatePageMetadata("/abnehmen", {
+    title: "abnehmen",
+    description: "abnehmen",
+  });
 }

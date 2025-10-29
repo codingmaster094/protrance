@@ -1,8 +1,8 @@
-export default async function AllPost(params) {
+export default async function AllListinPost(params) {
   try {
     const response = await fetch(
       `${
-        process.env.NEXT_POST_BASE_URL ||
+        process.env.NEXT_POST_LISTING_BASE_URL ||
         "https://protrance.vercel.app/api"
       }${params}`,
       { next: { revalidate: 0 } }
