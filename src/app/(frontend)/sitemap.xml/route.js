@@ -1,7 +1,7 @@
 export async function GET() {
   try {
     const res = await fetch(
-      "https://protrance-backend-main.vercel.app/sitemap.xml",
+      "https://protrance.vercel.app/sitemap.xml",
       { next: { revalidate: 0 } }
     );
 
@@ -23,7 +23,7 @@ export async function GET() {
     const fallbackXML = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>${process.env.FRONTEND_DOAMIN ||
+    <loc>${process.env.BASE_DOAMAIN ||
       "https://protrance-frontend-main.vercel.app"
       }</loc>
     <lastmod>${new Date().toISOString()}</lastmod>

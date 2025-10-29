@@ -24,7 +24,7 @@ export const Posts: CollectionConfig = {
     useAsTitle: 'title',
     preview: (doc) => {
       if (!doc?.slug) return null
-      return `https://protrance-backend-main.vercel.app/posts/${doc.slug}`
+      return `https://protrance.vercel.app/posts/${doc.slug}`
     },
   },
   access: {

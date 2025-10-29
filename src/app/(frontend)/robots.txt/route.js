@@ -1,7 +1,7 @@
 export async function GET() {
   try {
     const res = await fetch(
-      "https://protrance-backend-main.vercel.app/api/globals/robots",
+      "https://protrance.vercel.app/api/globals/robots",
       {
         next: { revalidate: 0 },
       }
@@ -37,7 +37,7 @@ export async function GET() {
       "allow: /",
       "disallow: /admin",
       `sitemap: ${
-        process.env.FRONTEND_DOAMIN || "https://yourdomain.com"
+        process.env.BASE_DOAMAIN || "https://yourdomain.com"
       }/sitemap.xml`,
     ].join("\n");
 

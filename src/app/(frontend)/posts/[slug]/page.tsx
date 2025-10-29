@@ -31,7 +31,7 @@ const SinglePostPage = () => {
   useEffect(() => {
     if (!slug) return
 
-    fetch(`https://protrance-backend-main.vercel.app/api/posts?where[slug][equals]=${slug}`)
+    fetch(`https://protrance.vercel.app/api/posts?where[slug][equals]=${slug}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.docs && data.docs.length > 0) {

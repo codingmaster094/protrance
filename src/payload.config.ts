@@ -31,7 +31,7 @@ import { de } from '@payloadcms/translations/languages/de'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 export default buildConfig({
-  serverURL: 'https://protrance-backend-main.vercel.app',
+  serverURL: 'https://protrance.vercel.app',
   i18n: {
     supportedLanguages: { en, de },
   },
@@ -57,7 +57,7 @@ export default buildConfig({
     },
     
   },
-  cors: ['https://protrance-backend-main.vercel.app'],
+  cors: ['https://protrance.vercel.app'],
   collections: [Users, Media, Posts, Pages],
   globals: [
     Header,

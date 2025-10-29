@@ -3,7 +3,7 @@ export default async function Alldata(params) {
     const response = await fetch(
       `${
         process.env.NEXT_PUBLIC_BASE_URL ||
-        "https://protrance-backend-main.vercel.app/api/globals"
+        "https://protrance.vercel.app/api/globals"
       }${params}`,
       { next: { revalidate: 0 } }
     );
