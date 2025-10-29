@@ -105,6 +105,7 @@ export interface Config {
     impressum: Impressum;
     datenschutzerklarung: Datenschutzerklarung;
     robots: Robot;
+    StickyButton: StickyButton;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
@@ -123,6 +124,7 @@ export interface Config {
     impressum: ImpressumSelect<false> | ImpressumSelect<true>;
     datenschutzerklarung: DatenschutzerklarungSelect<false> | DatenschutzerklarungSelect<true>;
     robots: RobotsSelect<false> | RobotsSelect<true>;
+    StickyButton: StickyButtonSelect<false> | StickyButtonSelect<true>;
   };
   locale: null;
   user: User & {
@@ -378,17 +380,10 @@ export interface Post {
        * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
        */
       image?: (string | null) | Media;
+      indexing?: ('index' | 'noindex') | null;
+      following?: ('follow' | 'nofollow') | null;
       canonicalUrl?: string | null;
     };
-    structuredData?:
-      | {
-          [k: string]: unknown;
-        }
-      | unknown[]
-      | string
-      | number
-      | boolean
-      | null;
   };
   publishedDate?: string | null;
   updatedAt: string;
@@ -624,9 +619,10 @@ export interface PostsSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               image?: T;
+              indexing?: T;
+              following?: T;
               canonicalUrl?: T;
             };
-        structuredData?: T;
       };
   publishedDate?: T;
   updatedAt?: T;
@@ -1286,17 +1282,10 @@ export interface Home {
        * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
        */
       image?: (string | null) | Media;
+      indexing?: ('index' | 'noindex') | null;
+      following?: ('follow' | 'nofollow') | null;
       canonicalUrl?: string | null;
     };
-    structuredData?:
-      | {
-          [k: string]: unknown;
-        }
-      | unknown[]
-      | string
-      | number
-      | boolean
-      | null;
   };
   publishedAt?: string | null;
   updatedAt?: string | null;
@@ -1602,17 +1591,10 @@ export interface Abnehman {
        * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
        */
       image?: (string | null) | Media;
+      indexing?: ('index' | 'noindex') | null;
+      following?: ('follow' | 'nofollow') | null;
       canonicalUrl?: string | null;
     };
-    structuredData?:
-      | {
-          [k: string]: unknown;
-        }
-      | unknown[]
-      | string
-      | number
-      | boolean
-      | null;
   };
   publishedAt?: string | null;
   updatedAt?: string | null;
@@ -1939,17 +1921,10 @@ export interface Entspannung_StressabbauPage {
        * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
        */
       image?: (string | null) | Media;
+      indexing?: ('index' | 'noindex') | null;
+      following?: ('follow' | 'nofollow') | null;
       canonicalUrl?: string | null;
     };
-    structuredData?:
-      | {
-          [k: string]: unknown;
-        }
-      | unknown[]
-      | string
-      | number
-      | boolean
-      | null;
   };
   publishedAt?: string | null;
   updatedAt?: string | null;
@@ -2269,17 +2244,10 @@ export interface Lampenfieber_Prufungsangst {
        * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
        */
       image?: (string | null) | Media;
+      indexing?: ('index' | 'noindex') | null;
+      following?: ('follow' | 'nofollow') | null;
       canonicalUrl?: string | null;
     };
-    structuredData?:
-      | {
-          [k: string]: unknown;
-        }
-      | unknown[]
-      | string
-      | number
-      | boolean
-      | null;
   };
   publishedAt?: string | null;
   updatedAt?: string | null;
@@ -2600,17 +2568,10 @@ export interface Raucherentwohnung {
        * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
        */
       image?: (string | null) | Media;
+      indexing?: ('index' | 'noindex') | null;
+      following?: ('follow' | 'nofollow') | null;
       canonicalUrl?: string | null;
     };
-    structuredData?:
-      | {
-          [k: string]: unknown;
-        }
-      | unknown[]
-      | string
-      | number
-      | boolean
-      | null;
   };
   publishedAt?: string | null;
   updatedAt?: string | null;
@@ -2931,17 +2892,10 @@ export interface Selbstfursorge {
        * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
        */
       image?: (string | null) | Media;
+      indexing?: ('index' | 'noindex') | null;
+      following?: ('follow' | 'nofollow') | null;
       canonicalUrl?: string | null;
     };
-    structuredData?:
-      | {
-          [k: string]: unknown;
-        }
-      | unknown[]
-      | string
-      | number
-      | boolean
-      | null;
   };
   publishedAt?: string | null;
   updatedAt?: string | null;
@@ -3069,17 +3023,10 @@ export interface Kontakt {
        * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
        */
       image?: (string | null) | Media;
+      indexing?: ('index' | 'noindex') | null;
+      following?: ('follow' | 'nofollow') | null;
       canonicalUrl?: string | null;
     };
-    structuredData?:
-      | {
-          [k: string]: unknown;
-        }
-      | unknown[]
-      | string
-      | number
-      | boolean
-      | null;
   };
   Reviews?: {
     enableReviews?: boolean | null;
@@ -3443,17 +3390,10 @@ export interface UberMich {
        * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
        */
       image?: (string | null) | Media;
+      indexing?: ('index' | 'noindex') | null;
+      following?: ('follow' | 'nofollow') | null;
       canonicalUrl?: string | null;
     };
-    structuredData?:
-      | {
-          [k: string]: unknown;
-        }
-      | unknown[]
-      | string
-      | number
-      | boolean
-      | null;
   };
   publishedAt?: string | null;
   updatedAt?: string | null;
@@ -3567,17 +3507,10 @@ export interface Blog {
        * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
        */
       image?: (string | null) | Media;
+      indexing?: ('index' | 'noindex') | null;
+      following?: ('follow' | 'nofollow') | null;
       canonicalUrl?: string | null;
     };
-    structuredData?:
-      | {
-          [k: string]: unknown;
-        }
-      | unknown[]
-      | string
-      | number
-      | boolean
-      | null;
   };
   publishedAt?: string | null;
   updatedAt?: string | null;
@@ -3620,17 +3553,10 @@ export interface Impressum {
        * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
        */
       image?: (string | null) | Media;
+      indexing?: ('index' | 'noindex') | null;
+      following?: ('follow' | 'nofollow') | null;
       canonicalUrl?: string | null;
     };
-    structuredData?:
-      | {
-          [k: string]: unknown;
-        }
-      | unknown[]
-      | string
-      | number
-      | boolean
-      | null;
   };
   publishedDate?: string | null;
   updatedAt?: string | null;
@@ -3673,17 +3599,10 @@ export interface Datenschutzerklarung {
        * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
        */
       image?: (string | null) | Media;
+      indexing?: ('index' | 'noindex') | null;
+      following?: ('follow' | 'nofollow') | null;
       canonicalUrl?: string | null;
     };
-    structuredData?:
-      | {
-          [k: string]: unknown;
-        }
-      | unknown[]
-      | string
-      | number
-      | boolean
-      | null;
   };
   publishedDate?: string | null;
   updatedAt?: string | null;
@@ -3696,6 +3615,25 @@ export interface Datenschutzerklarung {
 export interface Robot {
   id: string;
   robots?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StickyButton".
+ */
+export interface StickyButton {
+  id: string;
+  first_link?: {
+    label?: string | null;
+    url?: string | null;
+    target?: ('_self' | '_blank') | null;
+  };
+  secound_link?: {
+    label?: string | null;
+    url?: string | null;
+    target?: ('_self' | '_blank') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -4064,9 +4002,10 @@ export interface HomeSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               image?: T;
+              indexing?: T;
+              following?: T;
               canonicalUrl?: T;
             };
-        structuredData?: T;
       };
   publishedAt?: T;
   updatedAt?: T;
@@ -4228,9 +4167,10 @@ export interface AbnehmenSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               image?: T;
+              indexing?: T;
+              following?: T;
               canonicalUrl?: T;
             };
-        structuredData?: T;
       };
   publishedAt?: T;
   updatedAt?: T;
@@ -4401,9 +4341,10 @@ export interface Entspannung_StressabbauPageSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               image?: T;
+              indexing?: T;
+              following?: T;
               canonicalUrl?: T;
             };
-        structuredData?: T;
       };
   publishedAt?: T;
   updatedAt?: T;
@@ -4567,9 +4508,10 @@ export interface Lampenfieber_PrufungsangstSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               image?: T;
+              indexing?: T;
+              following?: T;
               canonicalUrl?: T;
             };
-        structuredData?: T;
       };
   publishedAt?: T;
   updatedAt?: T;
@@ -4734,9 +4676,10 @@ export interface RaucherentwohnungSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               image?: T;
+              indexing?: T;
+              following?: T;
               canonicalUrl?: T;
             };
-        structuredData?: T;
       };
   publishedAt?: T;
   updatedAt?: T;
@@ -4901,9 +4844,10 @@ export interface SelbstfursorgeSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               image?: T;
+              indexing?: T;
+              following?: T;
               canonicalUrl?: T;
             };
-        structuredData?: T;
       };
   publishedAt?: T;
   updatedAt?: T;
@@ -4985,9 +4929,10 @@ export interface KontaktSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               image?: T;
+              indexing?: T;
+              following?: T;
               canonicalUrl?: T;
             };
-        structuredData?: T;
       };
   Reviews?:
     | T
@@ -5169,9 +5114,10 @@ export interface UberMichSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               image?: T;
+              indexing?: T;
+              following?: T;
               canonicalUrl?: T;
             };
-        structuredData?: T;
       };
   publishedAt?: T;
   updatedAt?: T;
@@ -5255,9 +5201,10 @@ export interface BlogSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               image?: T;
+              indexing?: T;
+              following?: T;
               canonicalUrl?: T;
             };
-        structuredData?: T;
       };
   publishedAt?: T;
   updatedAt?: T;
@@ -5289,9 +5236,10 @@ export interface ImpressumSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               image?: T;
+              indexing?: T;
+              following?: T;
               canonicalUrl?: T;
             };
-        structuredData?: T;
       };
   publishedDate?: T;
   updatedAt?: T;
@@ -5323,9 +5271,10 @@ export interface DatenschutzerklarungSelect<T extends boolean = true> {
               title?: T;
               description?: T;
               image?: T;
+              indexing?: T;
+              following?: T;
               canonicalUrl?: T;
             };
-        structuredData?: T;
       };
   publishedDate?: T;
   updatedAt?: T;
@@ -5338,6 +5287,29 @@ export interface DatenschutzerklarungSelect<T extends boolean = true> {
  */
 export interface RobotsSelect<T extends boolean = true> {
   robots?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StickyButton_select".
+ */
+export interface StickyButtonSelect<T extends boolean = true> {
+  first_link?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        target?: T;
+      };
+  secound_link?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        target?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
