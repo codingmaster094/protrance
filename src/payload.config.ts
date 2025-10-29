@@ -27,6 +27,7 @@ import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 import { Robots } from './globals/robots/config'
 import { en } from '@payloadcms/translations/languages/en'
 import { de } from '@payloadcms/translations/languages/de'
+import { StickyButton } from './components/Sticky_button/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -76,6 +77,7 @@ export default buildConfig({
     Impressum,
     Datenschutzerklarung,
     Robots,
+    StickyButton
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

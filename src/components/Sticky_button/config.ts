@@ -1,22 +1,16 @@
-import type { Field } from 'payload';
-
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-  EXPERIMENTAL_TableFeature,
-} from '@payloadcms/richtext-lexical';
-
-export const StickyButton: Field = {
-  name: 'stickyButton',
-  type: 'group',
-  label: {
+import type { GlobalConfig } from 'payload'
+import { revalidateStickyButton } from './hooks/revalidateStickyButton'
+export const StickyButton: GlobalConfig = {
+  slug: 'StickyButton',
+   label: {
     en: 'Sticky Button',
     de: 'Klebriger Knopf',
   },
+  access: {
+    read: () => true,
+  },
   fields: [
-    {
+ {
       name: 'first_link',
       type: 'group',
       label: {
@@ -119,4 +113,10 @@ export const StickyButton: Field = {
       ],
     },
   ],
-};
+  hooks: {
+    afterChange: [revalidateStickyButton],
+  },
+}
+
+
+
