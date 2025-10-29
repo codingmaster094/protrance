@@ -1,14 +1,28 @@
 import Link from 'next/link';
 import React from 'react'
+import Alldata from '../untils/AllDataFatch';
 
-const Mobile_buttons = () => {
+const Mobile_buttons = async() => {
+    let Sticky_button_data;
+    try {
+      Sticky_button_data = await Alldata("/StickyButton");
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return <div>Error loading data.</div>;
+    }
+  
+    if (!Sticky_button_data) {
+      return <div>No data available.</div>;
+    }
   return (
     <div className="mobile-sticky fixed bottom-0 left-0 w-full bg-red z-[99999] sm:hidden block">
       <div className="flex mobile-s-wrapper">
         {/* Call Button */}
+        {
+          Sticky_button_data.first_link.url && (
         <Link
         
-          href="tel:+4975562476007"
+          href={Sticky_button_data.first_link.url}
           className="flex items-center justify-center gap-2 w-1/2 bg-[#9A1A60] text-white m-call py-4 px-[36px]"
         >
           <svg
@@ -26,13 +40,15 @@ const Mobile_buttons = () => {
               fill="white"
             ></path>
           </svg>
-          <p className="text-[var(--white)]">Anrufen</p>
+          <p className="text-[var(--white)]">{Sticky_button_data.first_link.label}</p>
         </Link>
-
-        {/* Bewerben Button */}
+          )
+        }
+        {
+          Sticky_button_data.secound_link.url && (
         <Link
         
-          href="/"
+          href={Sticky_button_data.secound_link.url}
           target="_blank"
           className="flex items-center justify-center gap-2 w-1/2 bg-white  m-call m-bewer py-4 px-[36px]"
         >
@@ -61,8 +77,11 @@ const Mobile_buttons = () => {
               strokeLinejoin="round"
             ></path>
           </svg>
-          <p className="text-[#9A1A60]">Termin</p>
+          <p className="text-[#9A1A60]">{Sticky_button_data.secound_link.label}</p>
         </Link>
+          )
+        }
+
       </div>
     </div>
   );
