@@ -219,7 +219,7 @@ const Contactform = ({ title, description, Form_title, MapImage }) => {
                 Informationen zum Datenschutz bzgl. Ihrer Anfrage finden Sie
                 hier :
                 <Link
-                  href="/datenschutzerklarung"
+                  href="/datenschutzerklaerung"
                   aria-label="link"
                   className="text-secondary hover:text-primary transition-all"
                 >
