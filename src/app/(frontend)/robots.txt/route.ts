@@ -12,7 +12,7 @@ export async function GET() {
 
     const robotsContent = data?.robots
       ?.split(/\s{2,}/)
-      ?.map((line) => line.trim())
+      ?.map((line: string) => line.trim())
       ?.join("\n")
       ?.trim();
 
@@ -21,11 +21,12 @@ export async function GET() {
     });
   } catch (error) {
     console.error("robots.txt fetch error:", error);
+
     const fallback = [
       "user-agent: *",
       "allow: /",
       "disallow: /admin",
-      `sitemap: ${process.env.BASE_DOMAIN || "https://yourdomain.com"}/sitemap.xml`,
+      `sitemap: ${process.env.BASE_DOMAIN || "https://protrance.vercel.app"}/sitemap.xml`,
     ].join("\n");
 
     return new Response(fallback, {
