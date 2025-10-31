@@ -5,9 +5,10 @@ export default async function Alldata(params) {
         process.env.NEXT_PUBLIC_BASE_URL ||
         "https://protrance.vercel.app/api/globals"
       }${params}`,
-      { next: { revalidate: 0 } }
+      { next: { revalidate: 3600 } } // revalidate every hour
     );
-    if (!response) {
+
+    if (!response.ok) {
       throw new Error(`Failed to fetch data: ${response.statusText}`);
     }
 
@@ -15,6 +16,6 @@ export default async function Alldata(params) {
     return data;
   } catch (error) {
     console.error("Error in Alldata:", error);
-    throw error; // Rethrow the error to be caught in the calling component
+    throw error;
   }
 }
