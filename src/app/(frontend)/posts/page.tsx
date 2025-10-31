@@ -1,23 +1,27 @@
-'use client'
-
-import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
+import Link from 'next/link';
 
 interface Post {
-  id: string
-  title: string
-  slug: string
-  publishedDate?: string
+  id: string;
+  title: string;
+  slug: string;
+  publishedDate?: string;
 }
 
-const PostsPage = () => {
-  const [posts, setPosts] = useState<Post[]>([])
+async function getPosts(): Promise<Post[]> {
+  const res = await fetch('https://protrance.vercel.app/api/posts', {
+    next: { revalidate: 3600 }, // ISR, revalidate every hour
+  });
 
-  useEffect(() => {
-    fetch('http://localhost:3000/api/posts') // Adjust if using different domain or port
-      .then((res) => res.json())
-      .then((data) => setPosts(data?.docs || []))
-  }, [])
+  if (!res.ok) {
+    throw new Error('Failed to fetch posts');
+  }
+
+  const data = await res.json();
+  return data.docs || [];
+}
+
+export default async function PostsPage() {
+  const posts = await getPosts();
 
   return (
     <div className="container mx-auto px-4 py-10">
@@ -32,7 +36,5 @@ const PostsPage = () => {
         ))}
       </ul>
     </div>
-  )
+  );
 }
-
-export default PostsPage
