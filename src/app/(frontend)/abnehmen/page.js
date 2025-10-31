@@ -13,11 +13,8 @@ import generatePageMetadata from '../untils/generatePageMetadata'
 
 const Page = async () => {
   let AbnehmenPageData;
-  let schemaJSON = null;
-
   try {
     AbnehmenPageData = await Alldata("/abnehmen");
-    schemaJSON = JSON.stringify(AbnehmenPageData.seo.structuredData);
   } catch (error) {
     console.error("Error fetching data:", error);
     return <div>Error loading data.</div>;

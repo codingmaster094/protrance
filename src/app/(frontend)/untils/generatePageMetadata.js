@@ -25,14 +25,6 @@ export default async function generatePageMetadata(params, fallback = {}) {
     const response = await fetch(url, { next: { revalidate: 60 } });
     const contentType = response.headers.get("content-type") || "";
     if (!response.ok) {
-      let text;
-      try {
-        text = await response.text();
-      } catch (err) {
-        text = `<failed to read error body: ${err.message}>`;
-      }
-
-
       const title = fallback.title || "Default title";
       const description = fallback.description || "Default description";
       return {

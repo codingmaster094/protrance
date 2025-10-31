@@ -13,10 +13,8 @@ import generatePageMetadata from '../untils/generatePageMetadata'
 
 const page = async () => {
   let Entspannung_StressabbauData;
-  let schemaJSON = null;
   try {
     Entspannung_StressabbauData = await Alldata("/entspannung_StressabbauPage");
-    schemaJSON = JSON.stringify(Entspannung_StressabbauData.seo.structuredData);
   } catch (error) {
     console.error("Error fetching data:", error);
     return <div>Error loading data.</div>;
