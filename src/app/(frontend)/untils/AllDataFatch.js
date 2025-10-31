@@ -6,14 +6,14 @@ export default async function Alldata(params) {
     );
 
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Failed to fetch data: ${response.status} ${errorText}`);
+      const errorBody = await response.text();
+      console.error(`API error response: ${response.status} - ${errorBody}`);
+      throw new Error(`Failed to fetch data: ${response.status} - ${errorBody}`);
     }
 
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
-    console.error("Error in Alldata:", error);
+    console.error("Error in Alldata fetch:", error);
     throw error;
   }
 }
