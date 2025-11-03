@@ -43,7 +43,7 @@ const Service = ({
                 <li key={i}>{li.children[0].text}</li>
               ))}
             </ul>
-            {BTN && (
+            {BTN.url !== "" && BTN.label !== "" && (
               <Link
                 href={BTN.url}
                 aria-label="btn-link"
@@ -103,20 +103,20 @@ const Service = ({
                     </div>
                   </div> */}
                   <div className="card bg-black/5 rounded-2xl overflow-hidden group relative z-10">
-                        <div className="overlay bg-white/0 absolute inset-0 z-10 group-hover:bg-white/70 transition-all"></div>
-                        <div className="image_wrapper h-[clamp(23.125rem,21.625rem+7.5vw,30.625rem)]" >
-                            <div className="image absolute inset-0 h-[clamp(23.125rem,21.625rem+7.5vw,30.625rem)] group-hover:!h-full transition-all duration-300 group-hover:scale-110 ease-out">
-                                <Image src={slide.aboutsImage.url}
-                                    alt="slider-image" className="size-full object-cover" width={400} height={450} />
-                            </div>
-                        </div>
-                        <div className="content p-5 relative z-10 pb-10 ">
-                            <h3 className="inline-block" dangerouslySetInnerHTML={{ __html: slide.title }}></h3>
-                            <div dangerouslySetInnerHTML={{
-                          __html: slide.description.root.children[0].children[0].text,
-                        }}></div>
-                        </div>
+                    <div className="overlay bg-white/0 absolute inset-0 z-10 group-hover:bg-white/70 transition-all"></div>
+                    <div className="image_wrapper h-[clamp(23.125rem,21.625rem+7.5vw,30.625rem)]" >
+                      <div className="image absolute inset-0 h-[clamp(23.125rem,21.625rem+7.5vw,30.625rem)] group-hover:!h-full transition-all duration-300 group-hover:scale-110 ease-out">
+                        <Image src={slide.aboutsImage.url}
+                          alt="slider-image" className="size-full object-cover" width={400} height={450} />
+                      </div>
                     </div>
+                    <div className="content p-5 relative z-10 pb-10 ">
+                      <h3 className="inline-block" dangerouslySetInnerHTML={{ __html: slide.title }}></h3>
+                      <div dangerouslySetInnerHTML={{
+                        __html: slide.description.root.children[0].children[0].text,
+                      }}></div>
+                    </div>
+                  </div>
                 </SwiperSlide>
               ))}
             </Swiper>
